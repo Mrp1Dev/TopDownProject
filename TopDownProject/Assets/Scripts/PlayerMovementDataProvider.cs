@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovementDataProvider : MovementDataProvider
 {
@@ -7,15 +6,15 @@ public class PlayerMovementDataProvider : MovementDataProvider
     private float maxSpeed;
     [SerializeField]
     private float acceleration;
+    [SerializeField]
+    private InputProvider input;
 
     private void Update()
     {
         MaxSpeed = maxSpeed;
         Acceleration = acceleration;
+        Direction = input.InputVector;
     }
 
-    private void OnMovement(InputValue input)
-    {
-        Direction = input.Get<Vector2>().normalized;
-    }
+    
 }
