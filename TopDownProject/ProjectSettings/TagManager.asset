@@ -44,3 +44,12 @@ TagManager:
   - name: UI
     uniqueID: 3262543723
     locked: 0
+  - name: Bullet
+    uniqueID: 1102432925
+    locked: 0
+  - name: Gun
+    uniqueID: 230285947
+    locked: 0
+  - name: Character
+    uniqueID: 1079490997
+    locked: 0

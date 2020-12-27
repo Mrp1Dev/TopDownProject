@@ -8,7 +8,7 @@ public class GeneralShootingHandler : ShootingHandler
     [SerializeField]
     private InputProvider input;
 
-    public override event Action<ShootingDataProvider> BulletShot;
+    public override event Action<ShootingData> BulletShot;
 
     private float rofTimer;
 
@@ -19,7 +19,7 @@ public class GeneralShootingHandler : ShootingHandler
         if (input.ShootHeld && CanShoot)
         {
             Shoot();
-            rofTimer = dataProvider.Data.RPM / 60f; // divided by 60 so its bullets per minute->second
+            rofTimer = 1f / (dataProvider.Data.rpm / 60f); // divided by 60 so its bullets per minute->second
         }
         else
         {
@@ -29,7 +29,7 @@ public class GeneralShootingHandler : ShootingHandler
     }
     public override void Shoot()
     {
-        BulletShot?.Invoke(data);
+        BulletShot?.Invoke(dataProvider.Data);
     }
 
 }
