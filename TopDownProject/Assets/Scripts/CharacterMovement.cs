@@ -14,8 +14,6 @@ public class CharacterMovement : MonoBehaviour
             data.Acceleration,
             0f,
             Mathf.Max(0f, data.MaxSpeed - rb.velocity.magnitude));
-        Debug.Log($"acceleration = {clampedAcceleration}");
         rb.velocity += data.Direction * clampedAcceleration;
-        Debug.Log(rb.velocity.magnitude);
     }
 }

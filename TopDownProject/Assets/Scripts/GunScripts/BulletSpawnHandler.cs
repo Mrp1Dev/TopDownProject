@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(ShootingHandler))]
 public class BulletSpawnHandler : MonoBehaviour
 {
     [SerializeField]
