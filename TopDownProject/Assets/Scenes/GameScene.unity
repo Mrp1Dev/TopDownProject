@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 446503586}
   - component: {fileID: 446503587}
   - component: {fileID: 446503589}
+  - component: {fileID: 446503590}
   - component: {fileID: 446503588}
   m_Layer: 0
   m_Name: Shotgun
@@ -428,6 +429,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingHandler: {fileID: 446503584}
   source: {fileID: 446503588}
+--- !u!114 &446503590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446503582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8339e8aadafcd2f4799357ed66142f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashing: {fileID: 1517138638}
+  rechargeAmount: 100
 --- !u!1 &545833537
 GameObject:
   m_ObjectHideFlags: 3
@@ -1404,15 +1419,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517138628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eec0296eb79154185523b072e0b6cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ef7d4315e98e00439052eafc994b4fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashForce: 50
-  enemyDetectionRadius: 1
-  cam: {fileID: 1146617664}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  dashForce: 45
+  maxRecharge: 100
+  chargeCostPerDash: 100
+  rechargePerSecond: 40
+  enemyDetection:
+    range: 6
+    castThickness: 0.5
+    origin: {fileID: 1517138630}
+    cam: {fileID: 1146617664}
+    layer:
+      serializedVersion: 2
+      m_Bits: 256
 --- !u!1 &1880730650
 GameObject:
   m_ObjectHideFlags: 0
