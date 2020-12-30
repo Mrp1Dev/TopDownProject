@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class BulletBehaviour : MonoBehaviour
         {
             damageable.TakeDamage(damage);
             Debug.Log("hit enemy!");
+            GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+            Destroy(gameObject);
         }
     }
 }

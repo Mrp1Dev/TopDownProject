@@ -2,9 +2,17 @@
 
 public class EnemyInputProvider : InputProvider
 {
-    //[Header("Shooting")]
+    [Header("Shooting")]
+    [SerializeField]
+    private float range;
+    [SerializeField]
+    private Transform target;
     private void Update()
     {
-        ShootHeld = true;
+        var distance = (target.position - transform.position).magnitude;
+        if (distance <= range)
+        {
+            ShootHeld = true;
+        }
     }
 }

@@ -5,13 +5,11 @@ public class MouseAimProvider : AimDataProvider
     [SerializeField]
     private float turnSpeed;
     [SerializeField]
-    private Camera cam;
-
+    private AimWithLayerDetection aimAssist;
     // Update is called once per frame
     void Update()
     {
         TurnSpeed = turnSpeed;
-        var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        TargetDir = mousePos - transform.position;
+        TargetDir = aimAssist.GetAim();
     }
 }

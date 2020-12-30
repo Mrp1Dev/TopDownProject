@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780563444847275712}
   - component: {fileID: 7551165552179382858}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,8 +95,9 @@ GameObject:
   - component: {fileID: 8864575454996182501}
   - component: {fileID: 2769415497420019114}
   - component: {fileID: 6787203863749510685}
-  - component: {fileID: 691111547911175368}
-  m_Layer: 0
+  - component: {fileID: 3547950717465628589}
+  - component: {fileID: -8896595064652821647}
+  m_Layer: 1
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.5
---- !u!114 &691111547911175368
+--- !u!114 &3547950717465628589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,3 +206,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73177dc3c37510343a3df319c1616bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8896595064652821647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8519644569229705838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 4c95a39ca0a0cf74aa232fa332c7298e, type: 2}
+    m_AmplitudeGain: 1.5
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.15
+      m_DecayTime: 0
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 10
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 5
+    m_PropagationSpeed: 343
