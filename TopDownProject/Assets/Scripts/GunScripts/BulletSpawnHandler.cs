@@ -19,8 +19,12 @@ public class BulletSpawnHandler : MonoBehaviour
         {
             var spawnPos = spawnPoint.position;
             var spawnRot = spawnPoint.eulerAngles;
-            spawnRot.z += Random.Range(-data.maxShootAngleOffset, data.maxShootAngleOffset) / 2F;
+            spawnRot.z += Random.Range(-data.maxShootAngleOffset, data.maxShootAngleOffset) / 2f;
             var instantiated = Instantiate(data.bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
+            if(instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
+            {
+                bullet.Init(data.totalDamage / amount);
+            }
         }
     }
 }

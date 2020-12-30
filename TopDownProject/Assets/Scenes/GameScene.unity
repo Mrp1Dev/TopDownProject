@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    totalDamage: 100
     projectileAmountPerShot:
       min: 10
       max: 25
@@ -679,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    totalDamage: 0
     projectileAmountPerShot:
       min: 1
       max: 1
@@ -1051,6 +1053,7 @@ GameObject:
   - component: {fileID: 1344791559}
   - component: {fileID: 1344791558}
   - component: {fileID: 1344791564}
+  - component: {fileID: 1344791560}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -1087,6 +1090,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1344791558}
+--- !u!114 &1344791560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344791557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cbb20e25befa44fbbd29d6b5a6eb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 85
 --- !u!58 &1344791561
 CircleCollider2D:
   m_ObjectHideFlags: 0
