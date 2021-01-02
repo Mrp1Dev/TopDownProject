@@ -1,30 +1,38 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(ShootingHandler))]
-public class BulletSpawnHandler : MonoBehaviour
+public class BulletSpawnHandler : ShootBehaviour
 {
+    [Tooltip("this is the amount of damage all bullets together would deal, ie totalDamage/bulletAmt")]
     [SerializeField]
-    private ShootingHandler shootingHandler;
+    private float totalDamage;
     [SerializeField]
     private Transform spawnPoint;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private MinMax<int> projectileAmountPerShot;
+    [SerializeField]
+    private float maxShootAngleOffset;
 
-    private void Start()
+    protected override void OnShoot()
     {
-        shootingHandler.BulletShot += SpawnBullets;
-    }
-    public void SpawnBullets(ShootingData data)
-    {
-        var amount = Random.Range(data.projectileAmountPerShot.min, data.projectileAmountPerShot.max);   
+        var amount = Random.Range(projectileAmountPerShot.min, projectileAmountPerShot.max);   
         for (int i = 0; i < amount; i++)
         {
             var spawnPos = spawnPoint.position;
             var spawnRot = spawnPoint.eulerAngles;
-            spawnRot.z += Random.Range(-data.maxShootAngleOffset, data.maxShootAngleOffset) / 2f;
-            var instantiated = Instantiate(data.bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
-            if(instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
+            spawnRot.z += RandomOffset();
+            var instantiated = Instantiate(bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
+            if (instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
             {
-                bullet.Init(data.totalDamage / amount);
+                bullet.Init(totalDamage / amount);
             }
         }
+    }
+
+    private float RandomOffset()
+    {
+        return Random.Range(-maxShootAngleOffset, maxShootAngleOffset) / 2f;
     }
 }

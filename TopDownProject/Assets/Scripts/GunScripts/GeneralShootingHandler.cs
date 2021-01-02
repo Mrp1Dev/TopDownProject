@@ -4,11 +4,10 @@ using UnityEngine;
 public class GeneralShootingHandler : ShootingHandler
 {
     [SerializeField]
-    private ShootingDataProvider dataProvider;
-    [SerializeField]
     private InputProvider input;
-
-    public override event Action<ShootingData> BulletShot;
+    [SerializeField]
+    private int RPM;
+    public override event Action BulletShot;
 
     private float rofTimer;
 
@@ -19,7 +18,7 @@ public class GeneralShootingHandler : ShootingHandler
         if (input.ShootHeld && CanShoot)
         {
             Shoot();
-            rofTimer = 1f / (dataProvider.Data.rpm / 60f); // divided by 60 so its bullets per minute->second
+            rofTimer = 1f / (RPM / 60f); // divided by 60 so its bullets per minute->second
         }
         else
         {
@@ -29,7 +28,7 @@ public class GeneralShootingHandler : ShootingHandler
     }
     public override void Shoot()
     {
-        BulletShot?.Invoke(dataProvider.Data);
+        BulletShot?.Invoke();
     }
 
 }

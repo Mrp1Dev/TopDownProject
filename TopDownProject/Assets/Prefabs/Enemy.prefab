@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6158315233091691904}
-  - component: {fileID: 6158315233091691962}
   - component: {fileID: 6158315233091691963}
   - component: {fileID: 6158315233091691964}
   - component: {fileID: 6158315233091691965}
@@ -38,27 +37,6 @@ Transform:
   m_Father: {fileID: 6158315234926743572}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6158315233091691962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158315233091691905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a17a1d55b5ad445bf1f4e4605ad447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    totalDamage: 10
-    projectileAmountPerShot:
-      min: 1
-      max: 1
-    rpm: 200
-    bulletPrefab: {fileID: 8519644569229705838, guid: 66a94db1aeec3c141a6cb50a4b695705, type: 3}
-    maxShootAngleOffset: 5
-    knockbackOnShoot: 0.5
 --- !u!114 &6158315233091691963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95e7eaa639680a4ba8bb22da70fe9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataProvider: {fileID: 6158315233091691962}
   input: {fileID: 6158315234926743571}
+  RPM: 200
 --- !u!114 &6158315233091691964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +63,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cfab34297182541b9979c93731568d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingHandler: {fileID: 6158315233091691963}
+  totalDamage: 20
   spawnPoint: {fileID: 6158315234609604588}
+  bulletPrefab: {fileID: 8519644569229705838, guid: 66a94db1aeec3c141a6cb50a4b695705, type: 3}
+  projectileAmountPerShot:
+    min: 1
+    max: 2
+  maxShootAngleOffset: 5
 --- !u!114 &6158315233091691965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,8 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904b38ff86bee364a87ddcbb23fb02c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingHandler: {fileID: 6158315233091691963}
   bodyToKnockback: {fileID: 6158315234926743573}
+  knockbackForce: 0.15
 --- !u!114 &6158315233091691966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8dec72ae707f418056176811909e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingHandler: {fileID: 6158315233091691963}
   source: {fileID: 6158315233091691967}
 --- !u!114 &6158315233091691967
 MonoBehaviour:
@@ -393,7 +375,6 @@ GameObject:
   - component: {fileID: 6158315234926743572}
   - component: {fileID: 6158315234926743573}
   - component: {fileID: 6158315234926743574}
-  - component: {fileID: 6158315234926743576}
   - component: {fileID: 6158315234926743577}
   - component: {fileID: 6158315234926743571}
   - component: {fileID: 6158315234926743575}
@@ -457,19 +438,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.7
---- !u!114 &6158315234926743576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158315234926743578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0b31277f64da745946e59f17f6bb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 6158315234926743577}
 --- !u!114 &6158315234926743577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586af4d3652def4469a1beb24c08140c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0
+  range: 9
   target: {fileID: 0}
 --- !u!114 &6158315234926743575
 MonoBehaviour:

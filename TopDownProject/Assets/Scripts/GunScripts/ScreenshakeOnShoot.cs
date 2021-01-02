@@ -1,19 +1,12 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-public class ScreenshakeOnShoot : MonoBehaviour
+public class ScreenshakeOnShoot : ShootBehaviour
 {
     [SerializeField]
-    private ShootingHandler shootingHandler;
-    [SerializeField]
     private CinemachineImpulseSource source;
-    // Start is called before the first frame update
-    void Start()
-    {
-        shootingHandler.BulletShot += (_) => Screenshake();
-    }
 
-    private void Screenshake()
+    protected override void OnShoot()
     {
         source.GenerateImpulse();
     }

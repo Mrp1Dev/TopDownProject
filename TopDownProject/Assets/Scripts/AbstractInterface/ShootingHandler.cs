@@ -4,5 +4,5 @@ using UnityEngine;
 public abstract class ShootingHandler : MonoBehaviour
 {
     public abstract void Shoot();
-    public abstract event Action<ShootingData> BulletShot;
+    public abstract event Action BulletShot;
 }

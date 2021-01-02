@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(ShootingHandler))]
-public class RechargeOnShoot : MonoBehaviour
+public class RechargeOnShoot : ShootBehaviour
 {
     [SerializeField]
-    private DashController dashing;
+    private DashController dashController;
     [SerializeField]
     private float rechargeAmount;
-    void Start()
-    {
-        GetComponent<ShootingHandler>().BulletShot += (_) => dashing.Recharge(rechargeAmount);
-    }
 
+    protected override void OnShoot()
+    {
+        dashController.Recharge(rechargeAmount);
+    }
 }
