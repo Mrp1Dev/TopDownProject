@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(ShootingHandler))]
 public class BulletSpawnHandler : ShootBehaviour
 {
-    [Tooltip("this is the amount of damage all bullets together would deal, ie totalDamage/bulletAmt")]
+    [Header("Bullet Data")]
     [SerializeField]
-    private float totalDamage;
+    private float DPS;
+    [SerializeField]
+    private float RPM;
+
+    [Header("Spawn Info")]
     [SerializeField]
     private Transform spawnPoint;
     [SerializeField]
@@ -14,6 +19,7 @@ public class BulletSpawnHandler : ShootBehaviour
     private MinMax<int> projectileAmountPerShot;
     [SerializeField]
     private float maxShootAngleOffset;
+
 
     protected override void OnShoot()
     {
@@ -26,7 +32,8 @@ public class BulletSpawnHandler : ShootBehaviour
             var instantiated = Instantiate(bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
             if (instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
             {
-                bullet.Init(totalDamage / amount);
+                var bulletDamage = (DPS / (RPM / 60f)) / amount;
+                bullet.Init(bulletDamage);
             }
         }
     }

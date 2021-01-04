@@ -28,7 +28,7 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 4c95a39ca0a0cf74aa232fa332c7298e, type: 2}
-    m_AmplitudeGain: 1
+    m_AmplitudeGain: 0.8
     m_FrequencyGain: 1
     m_RepeatMode: 0
     m_Randomize: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       m_AttackTime: 0
-      m_SustainTime: 0.08
+      m_SustainTime: 0.04
       m_DecayTime: 0
       m_ScaleWithImpact: 0
       m_HoldForever: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  RPM: 200
+  RPM: 750
 --- !u!114 &7678881668934268037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyToKnockback: {fileID: 0}
-  knockbackForce: 0.05
+  knockbackForce: 0.015
 --- !u!114 &8775621313357472420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DPS: 100
-  RPM: 200
+  RPM: 750
   spawnPoint: {fileID: 5691333562858145139}
-  bulletPrefab: {fileID: 8519644569229705838, guid: c1d4430b7a870f147bd9f8f12e01ec88, type: 3}
+  bulletPrefab: {fileID: 8519644569229705838, guid: 66a94db1aeec3c141a6cb50a4b695705, type: 3}
   projectileAmountPerShot:
     min: 1
-    max: 2
-  maxShootAngleOffset: 5
+    max: 3
+  maxShootAngleOffset: 10
 --- !u!1001 &5570386648610102408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,11 +128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 267489859409949593, guid: 60165c0680ffbd64982fe38c180a65ef, type: 3}
       propertyPath: m_Name
-      value: Rifle
+      value: RailGun
       objectReference: {fileID: 0}
     - target: {fileID: 267489860066398593, guid: 60165c0680ffbd64982fe38c180a65ef, type: 3}
       propertyPath: m_Color.g
-      value: 0.6256702
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 267489860066398593, guid: 60165c0680ffbd64982fe38c180a65ef, type: 3}
+      propertyPath: m_Color.r
+      value: 0.75690484
       objectReference: {fileID: 0}
     - target: {fileID: 267489860066398594, guid: 60165c0680ffbd64982fe38c180a65ef, type: 3}
       propertyPath: m_LocalScale.x
