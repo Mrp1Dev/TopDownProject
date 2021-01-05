@@ -29,7 +29,10 @@ public class BulletSpawnHandler : ShootBehaviour
             var spawnPos = spawnPoint.position;
             var spawnRot = spawnPoint.eulerAngles;
             spawnRot.z += RandomOffset();
-            var instantiated = Instantiate(bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
+            var instantiated = PoolingManager.Instance.GetFromPool(bulletPrefab);
+            bulletPrefab.transform.position = spawnPos;
+            bulletPrefab.transform.rotation = Quaternion.Euler(spawnRot);
+
             if (instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
             {
                 var bulletDamage = (DPS / (RPM / 60f)) / amount;
