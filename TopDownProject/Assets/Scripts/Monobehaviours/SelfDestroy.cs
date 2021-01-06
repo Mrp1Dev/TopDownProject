@@ -7,14 +7,13 @@ public class SelfDestroy : MonoBehaviour
     private float delay;
     [SerializeField]
     private bool pooled;
-    [SerializeField]
-    private GameObject prefab;
+    public GameObject prefab;
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(delay);
         if (pooled)
         {
-            PoolingManager.Instance.ReturnToPool(prefab, gameObject);
+            //PoolingManager.Instance.ReturnToPool(prefab, gameObject);
         }
     }
 }

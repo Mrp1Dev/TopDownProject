@@ -7,7 +7,7 @@ public class WeaponSwitchingHandler : MonoBehaviour
     private List<GameObject> weapons = new List<GameObject>();
     private int currentMouseIndex;
 
-    private MinMax<int> weaponIndexRange => new MinMax<int>() { min = 0, max = weapons.Count - 1 }; 
+    private MinMax<int> weaponIndexRange => new MinMax<int>() { min = 0, max = weapons.Count - 1 };
     // Update is called once per frame
     private void Update()
     {
@@ -21,18 +21,8 @@ public class WeaponSwitchingHandler : MonoBehaviour
             currentMouseIndex = weaponIndexRange.max;
         }
 
-        print(currentMouseIndex);
+
         ActivateExceptIndex(currentMouseIndex);
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    ActivateExcept(0);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    ActivateExcept(1);
-        //}
-
     }
 
     private void ActivateExceptIndex(int index)

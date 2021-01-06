@@ -20,7 +20,6 @@ public class BulletSpawnHandler : ShootBehaviour
     [SerializeField]
     private float maxShootAngleOffset;
 
-
     protected override void OnShoot()
     {
         var amount = Random.Range(projectileAmountPerShot.min, projectileAmountPerShot.max);   
@@ -29,10 +28,12 @@ public class BulletSpawnHandler : ShootBehaviour
             var spawnPos = spawnPoint.position;
             var spawnRot = spawnPoint.eulerAngles;
             spawnRot.z += RandomOffset();
-            var instantiated = PoolingManager.Instance.GetFromPool(bulletPrefab);
-            bulletPrefab.transform.position = spawnPos;
-            bulletPrefab.transform.rotation = Quaternion.Euler(spawnRot);
+            var instantiated = Instantiate(bulletPrefab, spawnPos, Quaternion.Euler(spawnRot));
 
+            if(instantiated.TryGetComponent<SelfDestroy>(out var selfDestroy))
+            {
+                Debug.LogWarning(selfDestroy.prefab == bulletPrefab);
+            }
             if (instantiated.TryGetComponent<BulletBehaviour>(out var bullet))
             {
                 var bulletDamage = (DPS / (RPM / 60f)) / amount;
