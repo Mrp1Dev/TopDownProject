@@ -10,9 +10,7 @@ public class EnemyInputProvider : InputProvider
     private void Update()
     {
         var distance = (target.position - transform.position).magnitude;
-        if (distance <= range)
-        {
-            ShootHeld = true;
-        }
+        bool inRange = distance <= range;
+        ShootHeld = inRange;
     }
 }

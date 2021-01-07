@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2577741822646388049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 0.11, y: 0.24, z: 1}
   m_Children: []
   m_Father: {fileID: 3120159952489233422}
   m_RootOrder: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 1102432925
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.06895265, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 935b26dc9a5af6848896a11c9529ae57, type: 3}
+  m_Color: {r: 1, g: 0.31517187, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,13 +92,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3120159952489233422}
   - component: {fileID: 2987842071893179257}
-  - component: {fileID: 8923220000650092278}
+  - component: {fileID: 8864575454996182501}
   - component: {fileID: 2769415497420019114}
   - component: {fileID: 6787203863749510685}
   - component: {fileID: 3547950717465628589}
   - component: {fileID: -8896595064652821647}
   m_Layer: 1
-  m_Name: CircleBullet
+  m_Name: ShotgunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,8 +111,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8519644569229705838}
-  m_LocalRotation: {x: 0, y: 0, z: 0.82188475, w: 0.5696538}
-  m_LocalPosition: {x: -0.7526942, y: -1.5664171, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.81974894, w: 0.5727231}
+  m_LocalPosition: {x: -0.9170973, y: -1.7892097, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4780563444847275712}
@@ -140,8 +140,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &8923220000650092278
-CircleCollider2D:
+--- !u!61 &8864575454996182501
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -153,9 +153,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.000000037252903, y: 0.0014848709}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Size: {x: 0.10082458, y: 0.2510023}
+  m_EdgeRadius: 0
 --- !u!114 &2769415497420019114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnForce:
-    min: 25
-    max: 35
+    min: 23
+    max: 30
 --- !u!114 &6787203863749510685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,9 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3e43ef2a44e984ea1bdf75b5389149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.5
-  pooled: 1
-  prefab: {fileID: 8519644569229705838}
+  delay: 1
 --- !u!114 &3547950717465628589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +206,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73177dc3c37510343a3df319c1616bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageOverDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.011507664
+      outSlope: -0.011507664
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.7607296
+      value: 0.9797381
+      inSlope: -0.00000397164
+      outSlope: -0.00000397164
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28591445
+    - serializedVersion: 3
+      time: 5.498704
+      value: 0.5638665
+      inSlope: -0.019384628
+      outSlope: -0.019384628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10.526835
+      value: 0.34237742
+      inSlope: -0.044049975
+      outSlope: -0.044049975
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &-8896595064652821647
 MonoBehaviour:
   m_ObjectHideFlags: 0

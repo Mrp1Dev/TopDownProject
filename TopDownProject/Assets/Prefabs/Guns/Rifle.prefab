@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cfab34297182541b9979c93731568d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DPS: 100
+  DPS: 65
   RPM: 200
   spawnPoint: {fileID: 5691333562858145139}
   bulletPrefab: {fileID: 8519644569229705838, guid: c1d4430b7a870f147bd9f8f12e01ec88, type: 3}

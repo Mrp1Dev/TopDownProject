@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3547950717465628589}
   - component: {fileID: -8896595064652821647}
   m_Layer: 1
-  m_Name: Bullet
+  m_Name: RailgunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnForce:
-    min: 25
-    max: 35
+    min: 35
+    max: 50
 --- !u!114 &6787203863749510685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,9 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3e43ef2a44e984ea1bdf75b5389149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.5
-  pooled: 1
-  prefab: {fileID: 8519644569229705838}
+  delay: 1.2
 --- !u!114 &3547950717465628589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +206,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73177dc3c37510343a3df319c1616bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageOverDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0013968935
+      outSlope: -0.0013968935
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3.8626497
+      value: 0.9946043
+      inSlope: -0.0057066837
+      outSlope: -0.0057066837
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 6.4495163
+      value: 0.80334425
+      inSlope: -0.064970635
+      outSlope: -0.064970635
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10.0494375
+      value: 0.6817881
+      inSlope: -0.02907588
+      outSlope: -0.02907588
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.38133806
+      outWeight: 0.1339299
+    - serializedVersion: 3
+      time: 14.577508
+      value: 0.53758514
+      inSlope: -0.031846445
+      outSlope: -0.031846445
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &-8896595064652821647
 MonoBehaviour:
   m_ObjectHideFlags: 0
