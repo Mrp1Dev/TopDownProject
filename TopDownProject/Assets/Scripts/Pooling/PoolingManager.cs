@@ -21,32 +21,34 @@ public class PoolingManager : MonoBehaviour
     }
 
 
-    public GameObject GetFromPool(GameObject prefab, Vector3 pos, Quaternion rot)
+    public GameObject GetFromPool(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent = null)
     {
         if (!pools.ContainsKey(prefab))
         {
             CreatePool(prefab);
         }
         GameObject result;
-        if(pools[prefab].Count == 0)
+        if (pools[prefab].Count == 0)
         {
-            result = Instantiate(prefab);
+            result = Instantiate(prefab, pos, rot, parent);
         }
         else
         {
             result = pools[prefab].Dequeue();
+
+            result.transform.position = pos;
+            result.transform.rotation = rot;
+            result.transform.parent = parent;
+            result.SetActive(true);
         }
 
-        result.transform.position = pos;
-        result.transform.rotation = rot;
-        result.SetActive(true);
         spawnedObjects.Add(result, pools[prefab]);
         return result;
     }
 
     public void ReturnToPool(GameObject obj)
     {
-        if(!spawnedObjects.TryGetValue(obj, out var poolRef))
+        if (!spawnedObjects.TryGetValue(obj, out var poolRef))
         {
             Destroy(obj); //not a pooled object
             return;
@@ -54,5 +56,6 @@ public class PoolingManager : MonoBehaviour
         obj.SetActive(false);
         obj.transform.parent = poolParent;
         poolRef.Enqueue(obj);
+        spawnedObjects.Remove(obj);
     }
 }

@@ -10,7 +10,10 @@ public class ForwardImpulse : MonoBehaviour
     void OnEnable()
     {
         var force = Random.Range(spawnForce.min, spawnForce.max);
-        GetComponent<Rigidbody2D>().AddForce(transform.up * force, ForceMode2D.Impulse);
+
+        var rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.AddForce(transform.up * force, ForceMode2D.Impulse);
     }
 
 }
