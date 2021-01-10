@@ -30,4 +30,16 @@ public class AimWithLayerDetection
         }
         return resultDir;
     }
+    public RaycastHit2D GetHit()
+    {
+        Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+        var resultDir = (mousePos - origin.position).normalized;
+        //offsets the position so that the cast is done that it doesn't overlap with behind and side hits.
+        var offsetOrigin = origin.position + resultDir * castThickness;
+        var offsetRange = range - castThickness;
+        //gets the layer item in aim
+        var hit = Physics2D.CircleCast(offsetOrigin, castThickness, resultDir, offsetRange, layer);
+        return hit;
+    }
 }
