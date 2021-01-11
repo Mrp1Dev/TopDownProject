@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1517138630}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6.000006
+    OrthographicSize: 8
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -3657,11 +3657,11 @@ GameObject:
   - component: {fileID: 1517138629}
   - component: {fileID: 1517138632}
   - component: {fileID: 1517138631}
+  - component: {fileID: 1517138633}
   - component: {fileID: 1517138636}
   - component: {fileID: 1517138634}
-  - component: {fileID: 1517138633}
-  - component: {fileID: 1517138638}
   - component: {fileID: 1517138639}
+  - component: {fileID: 1517138638}
   - component: {fileID: 1517138635}
   - component: {fileID: 1517138637}
   m_Layer: 0
@@ -3794,17 +3794,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1517138629}
-  grappleAccel: 7
+  hook:
+    lineRenderer: {fileID: 1517138637}
+    hookSpeed: 6
+  grappleAccel: 9.5
   precision: 1
   grappleCast:
-    range: 14
+    range: 20
     castThickness: 2
     origin: {fileID: 1517138630}
     cam: {fileID: 1146617664}
     layer:
       serializedVersion: 2
       m_Bits: 256
-  lineRenderer: {fileID: 1517138637}
 --- !u!114 &1517138636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3877,7 +3879,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.19607925
+        value: 0.1470604
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3889,8 +3891,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.6132076, g: 0.34871474, b: 0, a: 1}
+      key0: {r: 0, g: 1, b: 0.017374039, a: 1}
+      key1: {r: 1, g: 0.18384074, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -3957,10 +3959,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517138628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78cbb20e25befa44fbbd29d6b5a6eb70, type: 3}
+  m_Script: {fileID: 11500000, guid: f8f26ee8276ec9446b855015c42f7291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1200
+  takeDamageOnGrapple: 0
+  grappleController: {fileID: 1517138635}
+  maxHealth: 800
 --- !u!1001 &1638699754
 PrefabInstance:
   m_ObjectHideFlags: 0

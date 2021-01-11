@@ -24,7 +24,6 @@ public class BulletBehaviour : MonoBehaviour
         {
             float damage = GetDamage();
             damageable.TakeDamage(damage);
-            Debug.Log("hit enemy!");
             GetComponent<CinemachineImpulseSource>().GenerateImpulse();
             Destroy(gameObject);
         }

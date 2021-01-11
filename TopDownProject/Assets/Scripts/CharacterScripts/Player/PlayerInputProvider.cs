@@ -21,4 +21,5 @@ public class PlayerInputProvider : InputProvider
     {
         DashPressed?.Invoke();
     }
+
 }

@@ -1,66 +1,107 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
+[System.Serializable]
+public class GrapplingHook
+{
+    [SerializeField]
+    private LineRenderer lineRenderer;
+    [SerializeField]
+    private float hookSpeed;
+
+    private float grappleProgress;
+    public Vector2 MoveTowards(Vector2 origin, Vector2 target)
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, origin);
+        var currentEndPos = Vector2.Lerp(origin, target, grappleProgress);
+        grappleProgress += hookSpeed * Time.deltaTime;
+        lineRenderer.SetPosition(1, currentEndPos);
+        return currentEndPos;
+    }
+
+    public void SetActive(bool active)
+    {
+        lineRenderer.enabled = active;
+    }
+
+    public void Reset()
+    {
+        grappleProgress = 0f; 
+    }
+}
+
+[RequireComponent(typeof(InputProvider))]
 public class GrappleController : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb;
+    [SerializeField]
+    private GrapplingHook hook;
     [SerializeField]
     private float grappleAccel;
     [SerializeField]
     private float precision;
     [SerializeField]
     private AimWithLayerDetection grappleCast;
-    [SerializeField]
-    private LineRenderer lineRenderer;
-
     public bool Grappling { get; private set; }
 
     private GameObject target;
 
+    private void OnEnable()
+    {
+        GetComponent<InputProvider>().DashPressed += HandleClick;
+    }
+    private void OnDisable()
+    {
+        GetComponent<InputProvider>().DashPressed += HandleClick;
+    }
 
+    private void HandleClick()
+    {
+        var hit = grappleCast.GetHit();
+        hook.Reset();
+        if (hit)
+        {
+            target = hit.transform.gameObject;
+        }
+        else
+        {
+            StopGrappling();
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(1))
+        if (target != null)
         {
-            if (target != null)
+            var targetPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
+            bool reached = (targetPos - (Vector2)transform.position).magnitude <= precision;
+            var hookPos = hook.MoveTowards(transform.position, targetPos);
+            bool hooxreached = hookPos == targetPos;
+            if (hooxreached)
             {
-                var targetPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
-                if ((targetPos - (Vector2)transform.position).magnitude >= precision)
+                
+                if (!reached)
                 {
                     rb.velocity += (targetPos - (Vector2)transform.position).normalized * grappleAccel;
                     Grappling = true;
-                    lineRenderer.enabled = true;
-                    lineRenderer.SetPosition(0, transform.position);
-                    lineRenderer.SetPosition(1, targetPos);
                 }
                 else
                 {
                     StopGrappling();
                 }
             }
-            else
-            {
-                var hit = grappleCast.GetHit();
-                if (hit)
-                {
-                    target = hit.transform.gameObject;
-                }
-            }
         }
-        else
-        {
-            StopGrappling();
-        }
-
-
     }
 
     private void StopGrappling()
     {
         target = null;
         Grappling = false;
-        lineRenderer.enabled = false;
+        hook.SetActive(false);
+        hook.Reset();
     }
+
 }
