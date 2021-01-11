@@ -1,0 +1,136 @@
+Game Analysis
+This game will be a very fast paced Top-Down Shooter. The player will have various guns to use, and various enemies will exist to challenge the player. The player would go through levels and very high speeds destroying his enemies. Juiciness and Satisfaction are high priority.
+Mission Statement
+Fast Paced Top-Down Shooter where you will go around killing lots of enemies with various guns.
+Genre
+-Top Down
+-Shooter
+-Fast Paced
+Platforms
+	Windows. Possibly Linux, WebGL.
+
+Feature List:
+* High Speed omni-directional movement.
+* Levels will be Arenas.
+* Low Covers in Maps.
+* Grappling Ability to grapple to Enemies.
+* Health and Ammo will be obtained by killing enemies.
+* Player will 3-5 guns available to him to switch while in combat anytime, all with different uses against different enemies.
+* There will be 4-7 different types of enemies with different mechanics, stats and difficulty for each.
+* There will also be 2-4 Bosses, which will turn into normal enemies in later levels.
+* The progression will mostly be in form of unlocking new weapons and progressing through the arenas slowly unlocking new enemies and doing boss fights.
+* Art will be basic shapes with a few details on them.
+
+
+Guns:
+* Shotgun
+o Medium-Slow RPM.
+o High DPS.
+o Close Ranged.
+o Shoots many bullets at once.
+o First weapon and most important weapon in the game.
+o Best used with Grappling Hook.
+* Heavy Rifle
+o Medium RPM.
+o Medium-High DPS.
+o Medium-Far Ranged.
+o Shoots single bullets at once.
+* Railgun
+o Very High RPM.
+o Medium-High DPS
+o Medium-Far Ranged.
+o Slower speed while moving.
+o Bullets have a slight randomization in shoot angle.
+* Rocket Launcher
+o Low RPM.
+o Very high damage.
+o Slow Bullets.
+o AOE Damage.
+o Slow Movement Speed.
+* Homing Missile Gun
+o Medium-High RPM.
+o Medium Damage.
+o Medium-Slow Bullets.
+o Can shoot multiple bullets per shot.
+
+
+
+
+Enemies:
+* Cutter
+o Difficulty- 1.
+o Slow Movement Speed.
+o Low Damage.
+o Low Health.
+o Carry Short Knifes
+o Useful for getting Health.
+* Chipper
+o Difficulty- 1.
+o Slow Movement Speed.
+o Very Low Damage.
+o Low Health.
+o Carry Short Ranged Gun.
+o Useful for getting Ammo.
+* Living Bullet
+o Difficulty- 1.
+o Very Fast Movement Speed.
+o Low-Medium Damage.
+o Dies in 1 Hit.
+o Comes straight to player, until killed or hit.
+* Thrower
+o Difficulty- 2.
+o Slow-Medium Movement Speed.
+o Medium Health.
+o Shoots Medium sized Slow Projectiles.
+o Medium-High Damage.
+o Medium Ranged.
+* Missiler
+o Difficulty- 2.
+o Fast Movement Speed.
+o Low-Medium Health.
+o Shoots Medium Speed Homing Missiles.
+o Medium-Far Ranged.
+* Dasher
+o Difficulty- 2.
+o Very Fast Movement Speed.
+o Aims once towards player, and dashes straight without turning.
+o Medium-high health.
+o High Damage dealt on collision.
+* Balast
+o Difficulty- 3.
+o Very high health.
+o High Damage.
+o Medium-Far Ranged.
+o Throws large projectiles with slow recharge.
+o Very Slow and keeps some distance.
+o Appears as a Boss.
+* Kuttur
+o Difficulty- 3.
+o High Health.
+o High Damage.
+o Very High Speed.
+o Melee Ranged.
+o Runs very fast towards and player and tries to melee attack him.
+o Appears as a Boss.
+
+
+
+
+Level Design:
+* The levels will be arenas.
+* They would have a low number of covers.
+* They will have tiles that can damage the player.
+
+Objective/Progression:
+* The player will have to destroy spawner bases in each level, for which he will have to reduce a % to 0, done by killing enemies in the level.
+* The player has to destroy many of these spawner bases.
+* They will come across a few levels with Boss Fights.
+* They will get different types of guns as they progress.
+* They will find newer enemies in levels as they go through.
+
+
+
+
+
+
+
