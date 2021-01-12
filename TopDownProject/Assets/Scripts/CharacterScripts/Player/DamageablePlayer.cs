@@ -19,10 +19,18 @@ public class DamageablePlayer : DamageableObject
     {
         if (!takeDamageOnGrapple && grappleController.Grappling)
         {
-            Debug.Log("IGNORED WHILE GRAPPLING");
             return;
         }
         currentHealth -= amount;
-        Debug.Log("TOOK DAMAGE ON PLAYER!!!!!!");
+        TryDeath();
+    }
+
+    private void TryDeath()
+    {
+        if(currentHealth <= 0f)
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 }

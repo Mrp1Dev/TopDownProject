@@ -47,7 +47,7 @@ public class GrappleController : MonoBehaviour
     public bool Grappling { get; private set; }
 
     private GameObject target;
-
+    private Vector3 grappledPosition;
     private void OnEnable()
     {
         GetComponent<InputProvider>().DashPressed += HandleClick;
@@ -82,11 +82,17 @@ public class GrappleController : MonoBehaviour
             bool hooxreached = hookPos == targetPos;
             if (hooxreached)
             {
-                
                 if (!reached)
                 {
                     rb.velocity += (targetPos - (Vector2)transform.position).normalized * grappleAccel;
                     Grappling = true;
+                    var playerToHookDir = (targetPos - (Vector2)transform.position).normalized;
+                    var projectedVelocity = (Vector2)Vector3.Project(rb.velocity, -playerToHookDir);
+                    if(Vector3.Dot(playerToHookDir, projectedVelocity.normalized) < 0)
+                    {
+                        rb.velocity -= projectedVelocity;
+                    }
+                    
                 }
                 else
                 {
