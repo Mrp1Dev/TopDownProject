@@ -27,7 +27,7 @@ public class GrapplingHook
 
     public void Reset()
     {
-        grappleProgress = 0f; 
+        grappleProgress = 0f;
     }
 }
 
@@ -38,16 +38,22 @@ public class GrappleController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private GrapplingHook hook;
+    //[SerializeField]
+    //private float grappleSpeed;
     [SerializeField]
-    private float grappleAccel;
+    private MinMax<float> grappleSpeedOverRange;
     [SerializeField]
     private float precision;
     [SerializeField]
     private AimWithLayerDetection grappleCast;
     public bool Grappling { get; private set; }
 
-    private GameObject target;
+    private Transform target;
     private Vector3 grappledPosition;
+    private Vector2 velocityOnGrapple;
+    private float clockWise;
+    private bool grappleForward;
+    private float grappleSpeed;
     private void OnEnable()
     {
         GetComponent<InputProvider>().DashPressed += HandleClick;
@@ -63,7 +69,14 @@ public class GrappleController : MonoBehaviour
         hook.Reset();
         if (hit)
         {
-            target = hit.transform.gameObject;
+            target = hit.transform;
+            var targetPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
+            var inputVector = GetComponent<InputProvider>().InputVector;
+            var playerToHookDir = (targetPos - (Vector2)transform.position).normalized;
+
+            
+            clockWise = Vector2.Dot(Vector2.Perpendicular(playerToHookDir), inputVector.normalized) > 0 ? 1 : -1;
+            grappleForward = Vector3.Angle(playerToHookDir, inputVector) <= 45f || inputVector.magnitude < Mathf.Epsilon;
         }
         else
         {
@@ -79,20 +92,31 @@ public class GrappleController : MonoBehaviour
             var targetPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
             bool reached = (targetPos - (Vector2)transform.position).magnitude <= precision;
             var hookPos = hook.MoveTowards(transform.position, targetPos);
-            bool hooxreached = hookPos == targetPos;
-            if (hooxreached)
+            bool hookReached = hookPos == targetPos;
+            if (hookReached)
             {
                 if (!reached)
                 {
-                    rb.velocity += (targetPos - (Vector2)transform.position).normalized * grappleAccel;
-                    Grappling = true;
+                    //rb.velocity += (targetPos - (Vector2)transform.position).normalized * grappleAccel;
+                    grappleSpeed = Mathf.Lerp(grappleSpeedOverRange.min, grappleSpeedOverRange.max,
+                (targetPos - (Vector2)transform.position).magnitude / grappleCast.Range);
                     var playerToHookDir = (targetPos - (Vector2)transform.position).normalized;
+                    if (!grappleForward)
+                    {
+                        rb.velocity = Vector3.RotateTowards(Vector2.Perpendicular(playerToHookDir) * grappleSpeed * clockWise, playerToHookDir, 0.05f, 0f);
+                    }
+                    else
+                    {
+                        rb.velocity = playerToHookDir * grappleSpeed;
+                    }
+                    Debug.DrawRay(transform.position, rb.velocity);
                     var projectedVelocity = (Vector2)Vector3.Project(rb.velocity, -playerToHookDir);
                     if(Vector3.Dot(playerToHookDir, projectedVelocity.normalized) < 0)
                     {
                         rb.velocity -= projectedVelocity;
                     }
-                    
+                    Grappling = true;
+
                 }
                 else
                 {

@@ -3796,8 +3796,10 @@ MonoBehaviour:
   rb: {fileID: 1517138629}
   hook:
     lineRenderer: {fileID: 1517138637}
-    hookSpeed: 6
-  grappleAccel: 9.5
+    hookSpeed: 5.5
+  grappleSpeedOverRange:
+    min: 20
+    max: 60
   precision: 1
   grappleCast:
     range: 20
@@ -4409,7 +4411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6158315233582035999}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 586af4d3652def4469a1beb24c08140c, type: 3}
   m_Name: 
@@ -5659,7 +5661,7 @@ PrefabInstance:
       objectReference: {fileID: 1517138630}
     - target: {fileID: 6158315234926743571, guid: 20a9a72426c16934e92b323c2dab284f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6158315234926743572, guid: 20a9a72426c16934e92b323c2dab284f, type: 3}
       propertyPath: m_RootOrder

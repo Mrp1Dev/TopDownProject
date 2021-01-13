@@ -5,6 +5,7 @@ public class AimWithLayerDetection
 {
     [SerializeField]
     private float range;
+    public float Range => range;
     [SerializeField]
     private float castThickness;
     [SerializeField]

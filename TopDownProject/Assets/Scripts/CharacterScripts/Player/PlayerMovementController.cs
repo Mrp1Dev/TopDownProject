@@ -18,6 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(!GetComponent<GrappleController>().Grappling)
         movementHandler.Execute(rb, input.InputVector, acceleration, maxSpeed);
     }
 
