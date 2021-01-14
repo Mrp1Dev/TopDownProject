@@ -1,5 +1,4 @@
-﻿using UnityEditor.Rendering;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(InputProvider))]
 public class DashController : MonoBehaviour

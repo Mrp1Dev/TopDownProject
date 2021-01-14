@@ -1,35 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.XR.Haptics;
-
-[System.Serializable]
-public class GrapplingHook
-{
-    [SerializeField]
-    private LineRenderer lineRenderer;
-    [SerializeField]
-    private float hookSpeed;
-
-    private float grappleProgress;
-    public Vector2 MoveTowards(Vector2 origin, Vector2 target)
-    {
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, origin);
-        var currentEndPos = Vector2.Lerp(origin, target, grappleProgress);
-        grappleProgress += hookSpeed * Time.deltaTime;
-        lineRenderer.SetPosition(1, currentEndPos);
-        return currentEndPos;
-    }
-
-    public void SetActive(bool active)
-    {
-        lineRenderer.enabled = active;
-    }
-
-    public void Reset()
-    {
-        grappleProgress = 0f;
-    }
-}
 
 [RequireComponent(typeof(InputProvider))]
 public class GrappleController : MonoBehaviour
@@ -46,6 +16,13 @@ public class GrappleController : MonoBehaviour
     private float precision;
     [SerializeField]
     private AimWithLayerDetection grappleCast;
+    [SerializeField]
+    private float proGrappleDrag;
+    [SerializeField]
+    private float normalGrappleAccel;
+    [SerializeField]
+    private AimWithLayerDetection normalGrappleCast;
+    public bool AltMode { get; set; } = true;
     public bool Grappling { get; private set; }
 
     private Transform target;
@@ -54,6 +31,7 @@ public class GrappleController : MonoBehaviour
     private float clockWise;
     private bool grappleForward;
     private float grappleSpeed;
+    private bool wasGrappling;
     private void OnEnable()
     {
         GetComponent<InputProvider>().DashPressed += HandleClick;
@@ -65,22 +43,30 @@ public class GrappleController : MonoBehaviour
 
     private void HandleClick()
     {
-        var hit = grappleCast.GetHit();
+        var hit = (AltMode ? grappleCast : normalGrappleCast).GetHit();
         hook.Reset();
         if (hit)
         {
             target = hit.transform;
             var targetPos = target.GetComponent<Collider2D>().ClosestPoint(transform.position);
-            var inputVector = GetComponent<InputProvider>().InputVector;
+            //var inputVector = GetComponent<InputProvider>().InputVector;
             var playerToHookDir = (targetPos - (Vector2)transform.position).normalized;
-
-            
-            clockWise = Vector2.Dot(Vector2.Perpendicular(playerToHookDir), inputVector.normalized) > 0 ? 1 : -1;
-            grappleForward = Vector3.Angle(playerToHookDir, inputVector) <= 45f || inputVector.magnitude < Mathf.Epsilon;
+            var velocityDir = rb.velocity.normalized;
+            var angle = Vector2.Angle(velocityDir, playerToHookDir);
+            clockWise = Vector2.Dot(Vector2.Perpendicular(playerToHookDir), velocityDir) > 0 ? 1 : -1;
+            grappleForward = angle <= 45f || angle > (180f - 45f) || rb.velocity.magnitude < 0.1;
         }
         else
         {
             StopGrappling();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Grappling)
+        {
+            grappleForward = true;
         }
     }
 
@@ -97,26 +83,33 @@ public class GrappleController : MonoBehaviour
             {
                 if (!reached)
                 {
-                    //rb.velocity += (targetPos - (Vector2)transform.position).normalized * grappleAccel;
-                    grappleSpeed = Mathf.Lerp(grappleSpeedOverRange.min, grappleSpeedOverRange.max,
-                (targetPos - (Vector2)transform.position).magnitude / grappleCast.Range);
+                        
                     var playerToHookDir = (targetPos - (Vector2)transform.position).normalized;
-                    if (!grappleForward)
+                    if (AltMode)
                     {
-                        rb.velocity = Vector3.RotateTowards(Vector2.Perpendicular(playerToHookDir) * grappleSpeed * clockWise, playerToHookDir, 0.05f, 0f);
+                        grappleSpeed = Mathf.Lerp(grappleSpeedOverRange.min, grappleSpeedOverRange.max,
+                            (targetPos - (Vector2)transform.position).magnitude / grappleCast.Range);
+                        if (!grappleForward)
+                        {
+                            rb.velocity = Vector3.RotateTowards(Vector2.Perpendicular(playerToHookDir) * grappleSpeed * clockWise, playerToHookDir, 0.07f, 0f);
+                        }
+                        else
+                        {
+                            rb.velocity = playerToHookDir * grappleSpeed;
+                        }
+
+                        Debug.DrawRay(transform.position, rb.velocity);
                     }
                     else
                     {
-                        rb.velocity = playerToHookDir * grappleSpeed;
+                        rb.velocity += (targetPos - (Vector2)transform.position).normalized * normalGrappleAccel;
                     }
-                    Debug.DrawRay(transform.position, rb.velocity);
                     var projectedVelocity = (Vector2)Vector3.Project(rb.velocity, -playerToHookDir);
-                    if(Vector3.Dot(playerToHookDir, projectedVelocity.normalized) < 0)
+                    if (Vector3.Dot(playerToHookDir, projectedVelocity.normalized) < 0)
                     {
                         rb.velocity -= projectedVelocity;
                     }
                     Grappling = true;
-
                 }
                 else
                 {
@@ -124,14 +117,34 @@ public class GrappleController : MonoBehaviour
                 }
             }
         }
-    }
 
+        wasGrappling = Grappling;
+    }
+    private void LateUpdate()
+    {
+        if (wasGrappling && !Grappling)
+        {
+            StartCoroutine(DragVelocity(rb.velocity));
+        }
+    }
     private void StopGrappling()
     {
         target = null;
         Grappling = false;
         hook.SetActive(false);
         hook.Reset();
+
     }
 
+    private IEnumerator DragVelocity(Vector2 oldVelocity)
+    {
+        var curPercent = 100f;
+        while (curPercent > 0f)
+        {
+            rb.velocity += ((oldVelocity - rb.velocity) * curPercent / 100f) * 4f * Time.fixedDeltaTime;
+            curPercent -= proGrappleDrag * Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+    }
 }
